@@ -1,0 +1,98 @@
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Collections.Generic;
+using techinsight.Models;
+
+namespace techinsight.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<techinsight.Models.ApplicationDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
+
+        protected override void Seed(techinsight.Models.ApplicationDbContext context)
+        {
+            // Seed Articles data
+            var articles = new List<Article>
+            {
+                new Article { Id=1,
+                              Title = "Build An Angular App",
+                              Content = "By far the best way to learn anything is to just dive in and do it. So that is exactly what I am going to urge you to do." +
+                              "This article and the below video are part one of a whole course that has been designed with beginners in mind. So it does not include a lot of heavy theory and ideas." +
+                              "Instead it tries to give you the minimum effective dose for Angular. Taking your existing knowledge of Javascript and building on top of that with some new Angular code." +
+                              "This results in some of the code not being perfect \"Angular\". So if you have used Angular before you may want to tell me off, but it is done like this intentionally to help those beginners.",
+                              Author = "Dominic Sabi",
+                              Technology = "Angular"
+                },
+
+                new Article { Id=2,
+                              Title = "Parcel Bundler",
+                              Content = "If you have spent any amount of time in the javascript community you have either run into a problem with configuring a build system / bundler or you have heard people moaning about problems they have had with it. " +
+                              "It is the single biggest barrier to entry in the javascript community. No one wants to spend hours just to \"get ready\" to write actual code."+
+                              "Most of the modern frameworks have realised that this is a problem and try to help by providing zero config solutions that abstract the tooling away from you." +
+                              "These are things like create react app and Angular CLI.These tools are amazing but the problem with them is they are tied to a specific framework.",
+                              Author = "Xavi Hernandes",
+                              Technology = "Bundler"
+                },
+
+                new Article {
+                              Id=3,
+                              Title = "The 10 Most Common Mistakes JavaScript Developers Make",
+                              Content = "JavaScript is a language that is full of surprises. It is a language that is very easy to learn, but it is also a language that is very easy to learn badly. " +
+                                        "It is very easy to write code that works, but it is also very easy to write code that is slow, hard to maintain and hard to understand." +
+                                        "In this article I am going to go through the 10 most common mistakes that I see JavaScript developers make. I am going to show you how to fix them and how to avoid them in the future.",
+                              Author = "Dominic Sabi",
+                              Technology = "JavaScript"
+                },
+
+                new Article
+                {
+                    Id = 4,
+                    Title = "What is the best way to learn JavaScript?",
+                    Content = "The best way to learn JavaScript is to just dive in and start writing code. You can read all the books and watch all the videos, but until you start writing code you will never learn anything. " +
+                              "So I am going to urge you to just start writing code. You can start by writing code in the console of your browser. You can start by writing code in a codepen. You can start by writing code in a text editor and opening it in your browser. " +
+                              "It does not matter how you start, just start writing code.",
+                    Author = "Ritu Cair",
+                    Technology = "JavaScript"
+                },
+                new Article
+                {
+                    Id = 5,
+                    Title = "What is MVC?",
+                    Content = "MVC stands for Model View Controller. It is a design pattern that is used to separate the concerns of an application. It is a way to separate the data from the user interface and the user interface from the data. " +
+                              "This separation allows for a more modular and testable application. It also allows for multiple views of the same data. This means that you can have a web view and a mobile view of the same data without duplicating any code.",
+                    Author = "Sianandu Miku",
+                    Technology = "ASP.NET MVC"
+
+                },
+                new Article
+                {
+                    Id = 6,
+                    Title = "What is the best way to learn C#?",
+                    Content = "The best way to learn C# is to just dive in and start writing code. You can read all the books and watch all the videos, but until you start writing code you will never learn anything. " +
+                              "So I am going to urge you to just start writing code. You can start by writing code in the console of your browser. You can start by writing code in a codepen. You can start by writing code in a text editor and opening it in your browser. " +
+                              "It does not matter how you start, just start writing code.",
+                    Author = "Ritu Cair",
+                    Technology = "C#"
+                },
+                new Article
+                {
+                    Id = 7,
+                    Title = "What is the best way to learn ASP.NET MVC?",
+                    Content = "The best way to learn ASP.NET MVC is to just dive in and start writing code. You can read all the books and watch all the videos, but until you start writing code you will never learn anything. " +
+                              "So I am going to urge you to just start writing code. You can start by writing code in the console of your browser. You can start by writing code in a codepen. You can start by writing code in a text editor and opening it in your browser. " +
+                              "It does not matter how you start, just start writing code.",
+                    Author = "Ritu Cair",
+                    Technology = "ASP.NET MVC"
+                }
+            };
+
+            context.Articles.AddOrUpdate(x => x.Id, articles.ToArray());
+        }
+    }
+}
