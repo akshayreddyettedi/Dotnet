@@ -1,0 +1,60 @@
+@model IEnumerable<techinsight.Models.Article>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">        
+        <p class="lead">TechInsight - Explore Tech Articles</p>       
+    </section>
+
+    <!-- Technology Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="form-group me-3">
+                    <label for="technology" class="form-label me-2">Filter by Technology:</label>
+                    @Html.DropDownList("technology", 
+                        new SelectList(ViewBag.Technologies as List<string>, ViewBag.SelectedTechnology), 
+                        "-- All Technologies --", 
+                        new { @class = "form-select", id = "technology" })
+                </div>
+                <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+            }
+        </div>
+    </div>
+
+    <!-- Articles Display Section -->
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var article in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" id="articleTitle_@article.Id">@article.Title</h5>
+                            <p class="card-text" id="articleContent_@article.Id">
+                                @(article.Content.Length > 100 ? article.Content.Substring(0, 100) + "..." : article.Content)
+                            </p>
+                            <p class="card-text"><small class="text-muted">By <span id="articleAuthor_@article.Id">@article.Author</span></small></p>
+                            <div class="mt-auto">
+                                @Html.ActionLink("Read More", "Details", new { id = article.Id }, new { @class = "btn btn-primary", id = "readMoreBtn_" + article.Id })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h4>No Articles Found</h4>
+                    <p>There are currently no articles available.</p>
+                </div>
+            </div>
+        }
+    </div>
+</main>
